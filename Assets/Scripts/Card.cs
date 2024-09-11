@@ -16,6 +16,8 @@ public class Card : MonoBehaviour
 
     public SpriteRenderer frontImage;
 
+    public ParticleSystem Pt;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -39,10 +41,9 @@ public class Card : MonoBehaviour
 
         audioSource.PlayOneShot(clip);
         anim.SetBool("isOpen", true);
-        front.SetActive(true);
-        back.SetActive(false);      
-        
-        if(GameManager.instance.firstCard == null)
+        Invoke("CardStatus", 0.4f);
+
+        if (GameManager.instance.firstCard == null)
         {
             GameManager.instance.firstCard = this;
         }
@@ -54,6 +55,7 @@ public class Card : MonoBehaviour
     }
     public void DestoryCard()
     {
+        Invoke("PlayPt", 0.2f);
         Invoke("DestroyCardInvoke", 1.0f);
     }
     void DestroyCardInvoke()
@@ -69,5 +71,15 @@ public class Card : MonoBehaviour
         anim.SetBool("isOpen", false);
         front.SetActive(false);
         back.SetActive(true);
+    }
+
+    void CardStatus()
+    {
+        front.SetActive(true);
+        back.SetActive(false);
+    }
+    void PlayPt() 
+    {
+        Pt.Play();
     }
 }
