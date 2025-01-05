@@ -55,7 +55,7 @@ public class Card : MonoBehaviour
     }
     public void DestoryCard()
     {
-        Invoke("PlayPt", 0.2f);
+        Invoke("PlayPt", 0.0f);
         Invoke("DestroyCardInvoke", 1.0f);
     }
     void DestroyCardInvoke()
